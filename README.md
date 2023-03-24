@@ -3,7 +3,7 @@
 ### 1. setze im Login Screen Widgets ein, welche folgendes bewirken:
   - ein Passwort festlegen/verändern lässt und im lokalen Speicher hinterlegt (Widget: TextField)
   - das Passwort aus dem lokalen Speicher anzeigt (Widget: Text)
-  - Text eingeben und im Falle einer Übereinstimmung, mit dem (Widget: TextField)
+  - Text eingeben und im Falle einer Übereinstimmung, mit dem (Widget: TextField) <br>
     hinterlegten Passwort, zum zweiten Screen führt
 
 ### 2. erstelle einen zweiten Screen mit...
