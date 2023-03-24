@@ -7,7 +7,7 @@
     hinterlegten Passwort, zum zweiten Screen führt
 
 ### 2. erstelle einen zweiten Screen mit...
-  - einem Text-Widget welches das hinterlegte Passwort aus dem lokalen Speicher anzeigt (Widget: Text)
+  - einem Text-Widget welches das hinterlegte Passwort aus dem lokalen Speicher anzeigt
 
 
 
