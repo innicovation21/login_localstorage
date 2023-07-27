@@ -1,8 +1,22 @@
+// ignore_for_file: unused_import
+// ignore_for_file: unused_local_variable
+
 import 'package:flutter/material.dart';
+import 'package:hive_flutter/hive_flutter.dart';
+import 'package:login_storage_database/screens/loginscreen.dart';
 import 'package:login_storage_database/screens/screen1.dart';
+import 'package:login_storage_database/screens/todoscreen.dart';
 import 'package:sizer/sizer.dart';
 
-void main() {
+void main() async {
+  // Initialisierung von Hive
+  await Hive.initFlutter(); // Hive_flutter importieren
+
+  // wir öffnen/erstellen eine Hive-Box, in welche wir unsere Daten ablegen können
+  // (Es sind beliebig viele Boxen möglich)
+  var meineHiveBox = await Hive.openBox(
+      "toDoBox"); // sonst können wir nicht auf Inhalt zugreifen
+
   runApp(const MyApp());
 }
 
@@ -22,8 +36,7 @@ class MyApp extends StatelessWidget {
             colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
             useMaterial3: true,
           ),
-          // Startscreen: Screen1()
-          home: const Screen1(),
+          home: const ToDoScreen(),
         );
       },
     );
