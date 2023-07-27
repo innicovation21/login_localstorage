@@ -17,7 +17,7 @@ dependencies:
   # für responsive design
   sizer: ^2.0.15 
   # für lokalen speicher
-  shared_preferences: ^2.0.20
+  shared_preferences: ^2.2.0
 
 dev_dependencies:
   flutter_test:
