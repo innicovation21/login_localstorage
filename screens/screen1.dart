@@ -1,8 +1,7 @@
 // ignore_for_file: prefer_const_constructors
-// bis abschluss von screen1 möchten wir nicht auf fehlende "const" hingewiesen werden.
-// am ende sollte das ignore aufgehoben werden.
 
 import 'package:flutter/material.dart';
+import 'package:login_storage_database/screens/loginscreen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sizer/sizer.dart';
 
@@ -14,17 +13,17 @@ class Screen1 extends StatefulWidget {
 }
 
 class _Screen1State extends State<Screen1> {
-  // -------------- variables --------------
+  //region -------------- variables --------------
+
   // Instanzieren der Shared Preferences
   final Future<SharedPreferences> meinSpeicher =
       SharedPreferences.getInstance();
   // Variable für den textfield-controller
   final _textEingabeController = TextEditingController();
+  //endregion
 
-  // Variable als zwischenspeicher für ausgelesenen future-string
-  late String localPassword;
+  //region -------------- methods --------------
 
-  // -------------- methods --------------
   // Funktion zum abspeichern des Passwortes im local storage
   Future<void> setPassword() async {
     // Variable für die Eingabe aus dem Textfield
@@ -34,24 +33,7 @@ class _Screen1State extends State<Screen1> {
     // Anlegen des key-value pairs im local storage
     speicher.setString("password", newPassword);
   }
-
-  // Funktion zum abrufen des Passwortes aus dem local storage
-  Future<void> getPassword() async {
-    // den Eintrag aus dem local storage packen wir in unsere Variable
-    localPassword = await meinSpeicher.then((value) {
-      // ?? -> wenn kein wert vorhanden, dann leerer String ("") <- leerer String
-      return value.getString("password") ?? "";
-    });
-  }
-
-  // Bereich für Initialisierungen beim Instanzieren des Widgets
-  @override
-  void initState() {
-    super.initState();
-    // nachfolgende Aktionen geschehen, wenn der Screen aufgebaut wurde
-    getPassword();
-    print("Objekt erstellt");
-  }
+  //endregion
 
   @override
   Widget build(BuildContext context) {
@@ -111,10 +93,16 @@ class _Screen1State extends State<Screen1> {
             ),
             ElevatedButton(
               onPressed: () {
-                // übergangsweise testen, ob speicherung im local storage funktioniert hat
-                print(localPassword);
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) {
+                      return LoginScreen();
+                    },
+                  ),
+                );
               },
-              child: Text("get password"),
+              child: Text("zum Login"),
             ),
           ],
         ),
