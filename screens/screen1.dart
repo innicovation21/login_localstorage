@@ -101,6 +101,8 @@ class _Screen1State extends State<Screen1> {
                     },
                   ),
                 );
+                // übergangsweise testen, ob speicherung im local storage erfolgreich war
+                // print(localPassword);
               },
               child: Text("zum Login"),
             ),
