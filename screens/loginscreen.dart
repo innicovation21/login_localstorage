@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
+import 'package:hive/hive.dart';
 import 'package:login_storage_database/screens/todoscreen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sizer/sizer.dart';
@@ -29,6 +30,12 @@ class _LoginScreenState extends State<LoginScreen> {
   //endregion
 
   //region ----------- Methods ------------
+
+  // Funktion zum Öffnen der Hive-Box, mit welcher wir später arbeiten wollen.
+  Future<void> openMyBox() async {
+    // ignore: unused_local_variable
+    var meineHiveBox = await Hive.openBox("toDoBox");
+  }
 
   // Funktion zum abrufen des Passwortes aus dem local storage
   Future<void> getPassword() async {
@@ -84,8 +91,9 @@ class _LoginScreenState extends State<LoginScreen> {
   // Bereich für Initialisierungen beim Instanzieren des Widgets
   @override
   void initState() {
-    // nachfolgende Aktionen geschehen, wenn der Screen aufgebaut wurde
+    // nachfolgende Aktionen geschehen einmalig, wenn der Screen aufgebaut wurde
     getPassword();
+    openMyBox();
     super.initState();
   }
 
@@ -108,9 +116,11 @@ class _LoginScreenState extends State<LoginScreen> {
               color: Colors.black,
               // Textfield
               child: TextField(
+                // obscureText -> stellt alle Zeichen als Punkte dar (true/false)
                 obscureText: noVisibility,
                 textAlign: TextAlign.center,
                 style: TextStyle(color: Colors.white),
+                // Zuweisung unseres Controller, damit wir mit dem eingegebenen Inhalten arbeiten können
                 controller: _myController,
                 decoration: InputDecoration(
                   labelText: "password",
@@ -119,13 +129,18 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                   suffixIcon: IconButton(
                     onPressed: () {
+                      // wird der IconButton angeklickt, führt dies zur erneuten Ausführung der build-Method
+                      // mit einer entsprechend veränderten Darstellung des Eingabe-Textes
                       setState(() {
                         // "kippschalter" für sichtbarkeit des inputs
-                        if (noVisibility) {
-                          noVisibility = false;
-                        } else {
-                          noVisibility = true;
-                        }
+                        // ! <- vor dem bool als Umkehroperator
+                        noVisibility = !noVisibility;
+                        // ist die Kurzform folgender If-Abfrage:
+                        // if (noVisibility) {
+                        //   noVisibility = false;
+                        // } else {
+                        //   noVisibility = true;
+                        // }
                       });
                     },
                     icon: Icon(Icons.visibility),
@@ -139,6 +154,7 @@ class _LoginScreenState extends State<LoginScreen> {
             // Loginbutton
             ElevatedButton(
               onPressed: () {
+                // Aufruf der login()-Funktion, welche wir in diesem Widget zuvor definiert haben.
                 login();
               },
               child: Text("Login"),
