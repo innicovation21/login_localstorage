@@ -3,9 +3,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:login_storage_database/screens/loginscreen.dart';
 import 'package:login_storage_database/screens/screen1.dart';
-import 'package:login_storage_database/screens/todoscreen.dart';
 import 'package:sizer/sizer.dart';
 
 void main() async {
@@ -36,7 +34,7 @@ class MyApp extends StatelessWidget {
             colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
             useMaterial3: true,
           ),
-          home: const ToDoScreen(),
+          home: const Screen1(),
         );
       },
     );
